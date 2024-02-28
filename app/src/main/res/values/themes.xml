@@ -2,4 +2,11 @@
 <resources>
 
     <style name="Theme.Sportster" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <style name="Theme.SportsterSplashScreenTheme" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/gray_80</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/logo</item>
+        <item name="windowSplashScreenAnimationDuration">600</item>
+        <item name="postSplashScreenTheme">@style/Theme.Sportster</item>
+    </style>
 </resources>
