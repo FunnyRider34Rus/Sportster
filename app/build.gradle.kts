@@ -67,6 +67,7 @@ dependencies {
     implementation(libs.androidx.datastore)
     //Navigation Component
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.navigation.hilt)
     //Hilt
     implementation(libs.google.dagger)
     kapt(libs.google.dagger.kapt)

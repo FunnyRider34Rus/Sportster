@@ -1,7 +1,7 @@
 package com.elpablo.sportster.di
 
 import android.content.Context
-import com.elpablo.sportster.data.DataStoreRepository
+import com.elpablo.sportster.data.repository.DataStoreRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

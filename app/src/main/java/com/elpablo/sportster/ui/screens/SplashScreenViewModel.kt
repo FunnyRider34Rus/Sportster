@@ -6,7 +6,7 @@ import androidx.compose.runtime.State
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.elpablo.sportster.core.navigation.Screen
-import com.elpablo.sportster.data.DataStoreRepository
+import com.elpablo.sportster.data.repository.DataStoreRepository
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

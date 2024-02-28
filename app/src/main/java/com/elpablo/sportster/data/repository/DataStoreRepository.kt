@@ -1,4 +1,4 @@
-package com.elpablo.sportster.data
+package com.elpablo.sportster.data.repository
 
 import android.content.Context
 import androidx.datastore.core.DataStore
