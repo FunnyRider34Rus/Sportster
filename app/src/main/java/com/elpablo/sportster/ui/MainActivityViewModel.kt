@@ -23,7 +23,7 @@ class MainActivityViewModel @Inject constructor(appEntryUseCases: AppEntryUseCas
 
     init {
         appEntryUseCases.readAppEntry.invoke().onEach { shouldShowStartScreen ->
-            startDestination = if (!shouldShowStartScreen) {
+            startDestination = if (shouldShowStartScreen) {
                 Graph.MAIN.route
             } else {
                 Graph.ONBOARD.route

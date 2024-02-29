@@ -24,7 +24,7 @@ fun SportsterButton(
         Text(
             text = text,
             modifier = Modifier.padding(8.dp),
-            style = MaterialTheme.typography.titleMedium
+            style = MaterialTheme.typography.titleSmall
         )
     }
 }

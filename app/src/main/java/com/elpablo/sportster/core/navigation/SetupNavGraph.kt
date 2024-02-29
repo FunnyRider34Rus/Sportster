@@ -29,8 +29,13 @@ fun SetupNavGraph(
             composable(route = Screen.PERMISSIONS.route) {
                 PermissionsScreen(
                     modifier = modifier,
-                    navigateToNextScreen = { /*TODO*/ },
-                    grantPermissions = { /*TODO*/ }
+                    navigateIfPermissionsGranted = { navController.navigate(Graph.MAIN.route) }
+                )
+            }
+            composable(route = Screen.LOGIN.route) {
+                LoginScreen(
+                    modifier = modifier,
+                    navigateToNextScreen = {  }
                 )
             }
             navigation(startDestination = Screen.START.route, route = Graph.ONBOARD.route) {
@@ -42,12 +47,6 @@ fun SetupNavGraph(
                             viewModel.saveAppEntry()
                             navController.navigate(Screen.PERMISSIONS.route)
                         }
-                    )
-                }
-                composable(route = Screen.LOGIN.route) {
-                    LoginScreen(
-                        modifier = modifier,
-                        navigateToNextScreen = {  }
                     )
                 }
             }

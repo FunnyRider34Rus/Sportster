@@ -1,21 +1,29 @@
 package com.elpablo.sportster.ui.start
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.elpablo.sportster.R
 import com.elpablo.sportster.core.components.SportsterButton
+import com.elpablo.sportster.core.components.SportsterTitleOnlyText
 import com.elpablo.sportster.core.theme.SportsterTheme
 
 @Composable
@@ -25,15 +33,9 @@ fun StartScreen(modifier: Modifier = Modifier, navigateToNextScreen: () -> Unit)
             .fillMaxSize()
             .padding(32.dp)
     ) {
-        Text(
-            text = stringResource(id = R.string.start_screen_title),
-            style = MaterialTheme.typography.titleLarge
-        )
-        HorizontalDivider(
-            modifier = Modifier
-                .fillMaxWidth(0.8f)
-                .padding(vertical = 16.dp)
-                .align(Alignment.CenterHorizontally)
+        SportsterTitleOnlyText(
+            modifier = Modifier.fillMaxWidth(),
+            title = stringResource(id = R.string.start_screen_title)
         )
         Spacer(modifier = Modifier.weight(1f))
         Text(
