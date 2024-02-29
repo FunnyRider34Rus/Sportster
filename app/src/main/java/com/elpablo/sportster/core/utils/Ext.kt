@@ -11,3 +11,22 @@ fun Activity.openAppSettings() {
         Uri.fromParts("package", packageName, null)
     ).also(::startActivity)
 }
+
+sealed class Response<out T> {
+    object Loading: Response<Nothing>()
+
+    data class Success<out T>(
+        val data: T?
+    ): Response<T>()
+
+    data class Failure(
+        val e: Exception
+    ): Response<Nothing>()
+}
+
+//fun FirebaseUser.toUser() = mapOf(
+//    DISPLAY_NAME to displayName,
+//    EMAIL to email,
+//    PHOTO_URL to photoUrl?.toString(),
+//    CREATED_AT to serverTimestamp()
+//)

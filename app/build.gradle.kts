@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.google.hilt)
+    alias(libs.plugins.google.gms)
     kotlin("kapt")
 }
 
@@ -74,6 +75,11 @@ dependencies {
     kapt(libs.google.dagger.kapt)
     //Accompanist
     implementation(libs.google.accompanist.permissions)
+    //Firebase
+    implementation(platform(libs.google.firebase.bom))
+    implementation(libs.google.firebase.analytics)
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.play.services.auth)
 
     //Tests
     testImplementation(libs.junit)

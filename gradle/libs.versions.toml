@@ -14,6 +14,10 @@ hilt = "2.49"
 navigationCompose = "2.7.7"
 navigationHilt = "1.2.0"
 accompanistPermissions = "0.35.0-alpha"
+gmsServices = "4.4.1"
+firebaseBom = "32.7.3"
+playServicesAuth = "21.0.0"
+firebaseAuthKtx = "22.3.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -38,9 +42,14 @@ google-dagger-kapt = { group = "com.google.dagger", name = "hilt-android-compile
 androidx-navigation-hilt = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "navigationHilt" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
 google-accompanist-permissions = { group = "com.google.accompanist", name = "accompanist-permissions", version.ref = "accompanistPermissions" }
+google-firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
+google-firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
+play-services-auth = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "playServicesAuth" }
+firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx", version.ref = "firebaseAuthKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-google-hilt = { id= "com.google.dagger.hilt.android", version.ref = "hilt"}
+google-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt"}
+google-gms = { id = "com.google.gms.google-services", version.ref = "gmsServices" }
 
