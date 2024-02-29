@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -11,28 +12,33 @@ import androidx.navigation.compose.navigation
 import com.elpablo.sportster.ui.dashboard.DashboardScreen
 import com.elpablo.sportster.ui.permissions.PermissionsScreen
 import com.elpablo.sportster.ui.start.StartScreen
+import com.elpablo.sportster.ui.start.StartViewModel
 
 @Composable
 fun SetupNavGraph(
-    navController: NavHostController
+    navController: NavHostController,
+    startDestination: String
 ) {
     Scaffold { paddingValue ->
         val modifier = Modifier.padding(paddingValue)
         NavHost(
             navController = navController,
-            startDestination = Graph.ONBOARD.route
+            startDestination = startDestination
         ) {
             navigation(startDestination = Screen.START.route, route = Graph.ONBOARD.route) {
                 composable(route = Screen.START.route) {
+                    val viewModel: StartViewModel = hiltViewModel()
                     StartScreen(
                         modifier = modifier,
-                        navigateToNextScreen = { navController.navigate(Screen.PERMISSIONS.route) }
+                        navigateToNextScreen = {
+                            viewModel.saveAppEntry()
+                            navController.navigate(Screen.PERMISSIONS.route)
+                        }
                     )
                 }
                 composable(route = Screen.PERMISSIONS.route) {
                     PermissionsScreen(
                         modifier = modifier,
-                        navigateToPreviousScreen = { navController.navigate(Screen.START.route) },
                         navigateToNextScreen = { /*TODO*/ },
                         grantPermissions = { /*TODO*/ }
                     )
