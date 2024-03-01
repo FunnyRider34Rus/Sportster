@@ -9,5 +9,5 @@ import javax.inject.Inject
 class DashboardViewModel @Inject constructor(
     private val repository: AuthRepository
 ): ViewModel() {
-    val isUserAuthenticated get() = repository.isUserAuthenticatedInFirebase
+    val isUserAuthenticated get() = repository.isUserAuthenticatedInFirebase()
 }

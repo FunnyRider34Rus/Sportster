@@ -1,8 +1,7 @@
 package com.elpablo.sportster.ui.login
 
-import android.app.Activity.RESULT_OK
+import android.app.Activity
 import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -17,27 +16,62 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.elpablo.sportster.R
-import com.google.firebase.auth.GoogleAuthProvider.getCredential
+import com.elpablo.sportster.core.components.SportsterErrorWidget
+import com.elpablo.sportster.core.components.SportsterLoader
 import com.elpablo.sportster.core.components.SportsterTitleOnlyText
 import com.elpablo.sportster.core.theme.SportsterTheme
-import com.elpablo.sportster.ui.login.components.OneTapSignIn
-import com.elpablo.sportster.ui.login.components.SignInWithGoogle
-import com.google.android.gms.auth.api.identity.BeginSignInResult
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.GoogleAuthProvider
 
 @Composable
 fun LoginScreen(
     modifier: Modifier = Modifier,
-    viewModel: LoginViewModel,
-    signInClick: () -> Unit,
+    state: LoginViewState,
+    onEvent: (LoginEvent) -> Unit,
     navigateToMainScreen: () -> Unit
 ) {
+
+    val activity = LocalContext.current as Activity
+    val context = LocalContext.current
+    val token = stringResource(R.string.web_client_id)
+
+    val launcher = rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) {
+        val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
+        try {
+            val account = task.getResult(ApiException::class.java)!!
+            val credential = GoogleAuthProvider.getCredential(account.idToken!!, null)
+            onEvent(LoginEvent.onLoginButtonClick(credential))
+        } catch (e: ApiException) {
+            onEvent(LoginEvent.Error(e.localizedMessage))
+        }
+    }
+
+    if (state.isUserLogged) {
+        navigateToMainScreen.invoke()
+    }
+
+    if (state.isLoading) {
+        SportsterLoader()
+    }
+
+    if (state.isError) {
+        SportsterErrorWidget(
+            modifier = Modifier,
+            title = "Error",
+            text = state.error,
+            buttonText = stringResource(id = R.string.login_screen_title_error),
+            onButtonClick = { activity.finish() }
+        )
+    }
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -54,7 +88,15 @@ fun LoginScreen(
         )
         Spacer(modifier = Modifier.weight(1f))
         Button(
-            onClick = signInClick,
+            onClick = {
+                val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestIdToken(token)
+                    .requestEmail()
+                    .build()
+
+                val googleSignInClient = GoogleSignIn.getClient(context, gso)
+                launcher.launch(googleSignInClient.signInIntent)
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 32.dp)
@@ -72,44 +114,12 @@ fun LoginScreen(
             )
         }
     }
-
-    val launcher = rememberLauncherForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { result ->
-        if (result.resultCode == RESULT_OK) {
-            try {
-                val credentials = viewModel.oneTapClient.getSignInCredentialFromIntent(result.data)
-                val googleIdToken = credentials.googleIdToken
-                val googleCredentials = getCredential(googleIdToken, null)
-                viewModel.signInWithGoogle(googleCredentials)
-            } catch (it: ApiException) {
-                print(it)
-            }
-        }
-    }
-
-    fun launch(signInResult: BeginSignInResult) {
-        val intent = IntentSenderRequest.Builder(signInResult.pendingIntent.intentSender).build()
-        launcher.launch(intent)
-    }
-
-    OneTapSignIn(
-        launch = {
-            launch(it)
-        }
-    )
-
-    SignInWithGoogle(
-        navigateToMainScreen = { signedIn ->
-            if (signedIn) {
-                navigateToMainScreen.invoke()
-            }
-        }
-    )
 }
 
 @Preview(showBackground = true, device = "id:pixel_5")
 @Composable
 fun LoginScreenPreview() {
     SportsterTheme {
-
+        LoginScreen(state = LoginViewState(), onEvent = {  }, navigateToMainScreen = {  })
     }
 }

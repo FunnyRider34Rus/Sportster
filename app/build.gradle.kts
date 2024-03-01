@@ -72,6 +72,7 @@ dependencies {
     implementation(libs.androidx.navigation.hilt)
     //Hilt
     implementation(libs.google.dagger)
+    implementation(libs.firebase.firestore.ktx)
     kapt(libs.google.dagger.kapt)
     //Accompanist
     implementation(libs.google.accompanist.permissions)

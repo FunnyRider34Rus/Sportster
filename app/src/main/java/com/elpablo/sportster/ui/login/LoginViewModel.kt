@@ -1,40 +1,70 @@
 package com.elpablo.sportster.ui.login
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.elpablo.sportster.core.utils.Response.Success
-import com.elpablo.sportster.core.utils.Response.Loading
+import com.elpablo.sportster.core.utils.Response
 import com.elpablo.sportster.domain.repository.AuthRepository
-import com.elpablo.sportster.domain.repository.OneTapSignInResponse
-import com.elpablo.sportster.domain.repository.SignInWithGoogleResponse
-import com.google.android.gms.auth.api.identity.SignInClient
-import com.google.firebase.auth.AuthCredential
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(
-    private val repository: AuthRepository,
-    val oneTapClient: SignInClient
-): ViewModel() {
-    val isUserAuthenticated get() = repository.isUserAuthenticatedInFirebase
+class LoginViewModel @Inject constructor(private val repository: AuthRepository) : ViewModel() {
 
-    var oneTapSignInResponse by mutableStateOf<OneTapSignInResponse>(Success(null))
-        private set
-    var signInWithGoogleResponse by mutableStateOf<SignInWithGoogleResponse>(Success(false))
-        private set
+    private val _viewState = MutableStateFlow(LoginViewState())
+    val viewState: StateFlow<LoginViewState> = _viewState
 
-    fun oneTapSignIn() = viewModelScope.launch {
-        oneTapSignInResponse = Loading
-        oneTapSignInResponse = repository.oneTapSignInWithGoogle()
+    init {
+        if (repository.isUserAuthenticatedInFirebase()) {
+            _viewState.update {
+                it.copy(
+                    isUserLogged = true
+                )
+            }
+        }
     }
-
-    fun signInWithGoogle(googleCredential: AuthCredential) = viewModelScope.launch {
-        oneTapSignInResponse = Loading
-        signInWithGoogleResponse = repository.firebaseSignInWithGoogle(googleCredential)
+    fun onEvent(event: LoginEvent) {
+        when (event) {
+            is LoginEvent.onLoginButtonClick -> {
+                viewModelScope.launch {
+                    when(val response = repository.signIn(event.credential)) {
+                        is Response.Success -> {
+                            _viewState.update {
+                                it.copy(
+                                    isLoading = false,
+                                    isUserLogged = true
+                                )
+                            }
+                        }
+                        is Response.Loading -> {
+                            _viewState.update {
+                                it.copy(
+                                    isLoading = true
+                                )
+                            }
+                        }
+                        is Response.Failure -> {
+                            _viewState.update {
+                                it.copy(
+                                    isError = true,
+                                    error = response.e.localizedMessage ?: "Unexpected error"
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+            is LoginEvent.Error -> {
+                _viewState.update {
+                    it.copy(
+                        isError = true,
+                        error = event.errorMessage ?: "Unexpected error"
+                    )
+                }
+            }
+        }
     }
 }

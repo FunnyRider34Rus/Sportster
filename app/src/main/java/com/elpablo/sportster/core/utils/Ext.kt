@@ -23,10 +23,3 @@ sealed class Response<out T> {
         val e: Exception
     ): Response<Nothing>()
 }
-
-//fun FirebaseUser.toUser() = mapOf(
-//    DISPLAY_NAME to displayName,
-//    EMAIL to email,
-//    PHOTO_URL to photoUrl?.toString(),
-//    CREATED_AT to serverTimestamp()
-//)

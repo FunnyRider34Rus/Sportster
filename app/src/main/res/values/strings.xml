@@ -16,4 +16,6 @@
     <string name="login_screen_title">Авторизация</string>
     <string name="login_screen_body">Приложение имеет тесную интеграцию с сервисами Google.\nВ частности, планируется полноценная интеграция с Google Fit.</string>
     <string name="login_screen_button_login">Войти с</string>
+    <string name="login_screen_title_error">Критическая ошибка</string>
+    <string name="login_screen_button_error">Закрыть приложение</string>
 </resources>
