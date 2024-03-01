@@ -1,16 +1,23 @@
 package com.elpablo.sportster.core.navigation
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
+import com.elpablo.sportster.core.components.SportsterBottomBar
 import com.elpablo.sportster.ui.dashboard.DashboardScreen
 import com.elpablo.sportster.ui.dashboard.DashboardViewModel
 import com.elpablo.sportster.ui.login.LoginScreen
@@ -24,7 +31,20 @@ fun SetupNavGraph(
     navController: NavHostController,
     startDestination: String
 ) {
-    Scaffold { paddingValue ->
+    Scaffold(
+        bottomBar = {
+            Column {
+                HorizontalDivider(
+                    modifier = Modifier
+                        .fillMaxWidth(0.9f)
+                        .padding(horizontal = 32.dp)
+                        .align(Alignment.CenterHorizontally),
+                    color = MaterialTheme.colorScheme.primary
+                )
+                SportsterBottomBar(navController = navController)
+            }
+        }
+    ) { paddingValue ->
         val modifier = Modifier.padding(paddingValue)
         NavHost(
             navController = navController,
@@ -67,10 +87,19 @@ fun SetupNavGraph(
             navigation(startDestination = Screen.DASHBOARD.route, route = Graph.MAIN.route) {
                 composable(route = Screen.DASHBOARD.route) {
                     val viewModel: DashboardViewModel = hiltViewModel()
+                    val state by viewModel.viewState.collectAsStateWithLifecycle()
                     DashboardScreen(
                         modifier = modifier,
-                        viewModel = viewModel
+                        state = state
                     )
+                }
+
+                composable(route = Screen.ANALYTICS.route) {
+
+                }
+
+                composable(route = Screen.PROFILE.route) {
+
                 }
             }
         }

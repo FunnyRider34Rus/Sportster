@@ -28,7 +28,7 @@ class LoginViewModel @Inject constructor(private val repository: AuthRepository)
     }
     fun onEvent(event: LoginEvent) {
         when (event) {
-            is LoginEvent.onLoginButtonClick -> {
+            is LoginEvent.OnLoginButtonClick -> {
                 viewModelScope.launch {
                     when(val response = repository.signIn(event.credential)) {
                         is Response.Success -> {

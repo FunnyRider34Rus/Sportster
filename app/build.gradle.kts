@@ -81,6 +81,9 @@ dependencies {
     implementation(libs.google.firebase.analytics)
     implementation(libs.firebase.auth.ktx)
     implementation(libs.play.services.auth)
+    //Icons
+    implementation(libs.androidx.compose.icons)
+    implementation(libs.androidx.compose.icons.extended)
 
     //Tests
     testImplementation(libs.junit)

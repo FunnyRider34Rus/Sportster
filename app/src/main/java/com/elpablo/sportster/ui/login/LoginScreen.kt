@@ -48,7 +48,7 @@ fun LoginScreen(
         try {
             val account = task.getResult(ApiException::class.java)!!
             val credential = GoogleAuthProvider.getCredential(account.idToken!!, null)
-            onEvent(LoginEvent.onLoginButtonClick(credential))
+            onEvent(LoginEvent.OnLoginButtonClick(credential))
         } catch (e: ApiException) {
             onEvent(LoginEvent.Error(e.localizedMessage))
         }

@@ -18,4 +18,8 @@
     <string name="login_screen_button_login">Войти с</string>
     <string name="login_screen_title_error">Критическая ошибка</string>
     <string name="login_screen_button_error">Закрыть приложение</string>
+    <!-- BottomBar -->
+    <string name="bottombar_lable_dashboard">Тренировка</string>
+    <string name="bottombar_label_analytics">Статистика</string>
+    <string name="bottombar_label_profile">Профиль</string>
 </resources>
