@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.compose.runtime.Composable
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
+import com.elpablo.sportster.core.navigation.Graph
 import com.elpablo.sportster.core.navigation.Screen
 import com.elpablo.sportster.core.navigation.SetupNavGraph
 import com.elpablo.sportster.core.theme.SportsterTheme
@@ -38,6 +39,6 @@ fun Sportster(startDestination: String) {
     val navController = rememberNavController()
     SetupNavGraph(
         navController = navController,
-        startDestination = Screen.LOGIN.route//startDestination
+        startDestination = Graph.MAIN.route//startDestination
     )
 }

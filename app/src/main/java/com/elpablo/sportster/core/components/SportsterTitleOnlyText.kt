@@ -16,13 +16,15 @@ fun SportsterTitleOnlyText(modifier: Modifier, title: String) {
     Column(modifier = modifier) {
         Text(
             text = title,
+            color = MaterialTheme.colorScheme.primary,
             style = MaterialTheme.typography.titleLarge
         )
         HorizontalDivider(
             modifier = Modifier
                 .fillMaxWidth(0.9f)
                 .padding(vertical = 16.dp)
-                .align(Alignment.CenterHorizontally)
+                .align(Alignment.CenterHorizontally),
+            color = MaterialTheme.colorScheme.primary
         )
     }
 }

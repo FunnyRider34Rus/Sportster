@@ -71,7 +71,7 @@ fun PermissionsScreen(
                 )
                 Spacer(modifier = Modifier.weight(1f))
                 SportsterButton(
-                    modifier = Modifier.align(Alignment.CenterHorizontally),
+                    modifier = Modifier.align(Alignment.CenterHorizontally).padding(bottom = 32.dp),
                     text = stringResource(id = R.string.permissions_screen_button_open_system_settings),
                     onClick = {
                         context.openAppSettings()

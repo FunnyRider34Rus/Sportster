@@ -33,16 +33,7 @@ fun SetupNavGraph(
 ) {
     Scaffold(
         bottomBar = {
-            Column {
-                HorizontalDivider(
-                    modifier = Modifier
-                        .fillMaxWidth(0.9f)
-                        .padding(horizontal = 32.dp)
-                        .align(Alignment.CenterHorizontally),
-                    color = MaterialTheme.colorScheme.primary
-                )
-                SportsterBottomBar(navController = navController)
-            }
+            SportsterBottomBar(navController = navController)
         }
     ) { paddingValue ->
         val modifier = Modifier.padding(paddingValue)
