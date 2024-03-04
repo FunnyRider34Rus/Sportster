@@ -1,7 +1,6 @@
 package com.elpablo.sportster.data.repository
 
 import android.content.Context
-import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
@@ -17,14 +16,12 @@ class DataStoreRepositoryImpl(private val context: Context): DataStoreRepository
 
     override suspend fun saveAppEntry() {
         context.dataStore.edit { settings ->
-            Log.d("test", "DataStore: save")
             settings[PreferencesKey.APP_ENTRY] = true
         }
     }
 
     override fun readAppEntry(): Flow<Boolean> {
         return context.dataStore.data.map { preferences ->
-            Log.d("test", "DataStore: read")
             preferences[PreferencesKey.APP_ENTRY] ?: false
         }
     }

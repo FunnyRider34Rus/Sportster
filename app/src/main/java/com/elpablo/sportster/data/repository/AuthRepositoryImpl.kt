@@ -2,7 +2,6 @@ package com.elpablo.sportster.data.repository
 
 import com.elpablo.sportster.core.utils.AppConst.FIRESTORE_NODE_USERS
 import com.elpablo.sportster.core.utils.Response
-import com.elpablo.sportster.core.utils.Response.Loading
 import com.elpablo.sportster.core.utils.Response.Failure
 import com.elpablo.sportster.core.utils.Response.Success
 import com.elpablo.sportster.domain.model.User

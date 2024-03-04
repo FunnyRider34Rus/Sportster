@@ -1,16 +1,10 @@
 package com.elpablo.sportster.core.navigation
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
@@ -25,6 +19,8 @@ import com.elpablo.sportster.ui.login.LoginViewModel
 import com.elpablo.sportster.ui.permissions.PermissionsScreen
 import com.elpablo.sportster.ui.start.StartScreen
 import com.elpablo.sportster.ui.start.StartViewModel
+import com.elpablo.sportster.ui.user_data.UserDataScreen
+import com.elpablo.sportster.ui.user_data.UserDataViewModel
 
 @Composable
 fun SetupNavGraph(
@@ -57,6 +53,19 @@ fun SetupNavGraph(
                     state = state,
                     onEvent = viewModel::onEvent,
                     navigateToMainScreen = {
+                        navController.navigate(Screen.USERDATA.route)
+                    }
+                )
+            }
+
+            composable(route = Screen.USERDATA.route) {
+                val viewModel: UserDataViewModel = hiltViewModel()
+                val state by viewModel.viewState.collectAsStateWithLifecycle()
+                UserDataScreen(
+                    modifier = modifier,
+                    state = state,
+                    onEvent = viewModel::onEvent,
+                    navigateToMainScreen = {
                         navController.navigate(Graph.MAIN.route)
                     }
                 )
@@ -81,7 +90,8 @@ fun SetupNavGraph(
                     val state by viewModel.viewState.collectAsStateWithLifecycle()
                     DashboardScreen(
                         modifier = modifier,
-                        state = state
+                        state = state,
+                        navigateToPermissionScreen = { navController.navigate(Screen.PERMISSIONS.route) }
                     )
                 }
 

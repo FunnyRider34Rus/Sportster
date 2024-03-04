@@ -25,6 +25,7 @@ class DashboardViewModel @Inject constructor(
                     isUserLogged = true
                 )
             }
+
             viewModelScope.launch {
                 when(val response = repository.getUser()) {
                     is Response.Failure -> {

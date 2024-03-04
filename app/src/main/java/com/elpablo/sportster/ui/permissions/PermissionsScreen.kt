@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -35,6 +36,12 @@ fun PermissionsScreen(
 
     val context = LocalContext.current as Activity
     val permissionsState = rememberMultiplePermissionsState(permissions = permissions)
+
+    LaunchedEffect(key1 = permissionsState.allPermissionsGranted) {
+        if (!permissionsState.allPermissionsGranted) {
+            navigateIfPermissionsGranted.invoke()
+        }
+    }
 
     Column(
         modifier = modifier
@@ -71,15 +78,15 @@ fun PermissionsScreen(
                 )
                 Spacer(modifier = Modifier.weight(1f))
                 SportsterButton(
-                    modifier = Modifier.align(Alignment.CenterHorizontally).padding(bottom = 32.dp),
+                    modifier = Modifier
+                        .align(Alignment.CenterHorizontally)
+                        .padding(bottom = 32.dp),
                     text = stringResource(id = R.string.permissions_screen_button_open_system_settings),
                     onClick = {
                         context.openAppSettings()
                     }
                 )
             }
-        } else {
-            navigateIfPermissionsGranted.invoke()
         }
     }
 }
@@ -89,6 +96,6 @@ fun PermissionsScreen(
 fun PreviewPermissionsScreen() {
     SportsterTheme {
         PermissionsScreen(
-            navigateIfPermissionsGranted = { })
+            navigateIfPermissionsGranted = {  })
     }
 }
