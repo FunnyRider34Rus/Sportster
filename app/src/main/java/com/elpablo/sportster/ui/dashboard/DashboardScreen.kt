@@ -1,5 +1,6 @@
 package com.elpablo.sportster.ui.dashboard
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,8 +16,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.viewinterop.AndroidViewBinding
 import com.elpablo.sportster.core.theme.SportsterTheme
 import com.elpablo.sportster.core.utils.AppConst
+import com.elpablo.sportster.databinding.MapViewBinding
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 
@@ -25,8 +28,7 @@ import com.google.accompanist.permissions.rememberMultiplePermissionsState
 fun DashboardScreen(
     modifier: Modifier = Modifier,
     state: DashboardViewState,
-    navigateToPermissionScreen: () -> Unit,
-    navigateToLoginScreen: () -> Unit
+    navigateToPermissionScreen: () -> Unit
 ) {
 
     val permissionsState = rememberMultiplePermissionsState(permissions = AppConst.permissions)
@@ -35,43 +37,82 @@ fun DashboardScreen(
         if (!permissionsState.allPermissionsGranted) {
             navigateToPermissionScreen.invoke()
         }
-        if (!state.isUserLogged) {
-            navigateToLoginScreen.invoke()
-        }
     }
 
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(32.dp)
     ) {
-
-        Row {
-            Text(
-                text = "Привет,",
-                color = MaterialTheme.colorScheme.secondary,
-                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Normal)
-            )
-            Text(
-                text = state.user?.displayName ?: "Пользователь",
-                modifier = Modifier.padding(start = 8.dp),
-                color = MaterialTheme.colorScheme.primary,
-                style = MaterialTheme.typography.titleLarge
+        Column(modifier = Modifier.padding(start = 32.dp, top = 32.dp, end = 32.dp)) {
+            Row {
+                Text(
+                    text = "Привет,",
+                    color = MaterialTheme.colorScheme.secondary,
+                    style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Normal)
+                )
+                Text(
+                    text = state.user?.displayName ?: "Пользователь",
+                    modifier = Modifier.padding(start = 8.dp),
+                    color = MaterialTheme.colorScheme.primary,
+                    style = MaterialTheme.typography.titleLarge
+                )
+            }
+            HorizontalDivider(
+                modifier = Modifier
+                    .fillMaxWidth(0.9f)
+                    .padding(vertical = 16.dp)
+                    .align(Alignment.CenterHorizontally),
+                color = MaterialTheme.colorScheme.primary
             )
         }
-        HorizontalDivider(
-            modifier = Modifier
-                .fillMaxWidth(0.9f)
-                .padding(vertical = 16.dp)
-                .align(Alignment.CenterHorizontally),
-            color = MaterialTheme.colorScheme.primary
-        )
 
         Column(
             modifier = Modifier
                 .fillMaxSize()
         ) {
+            Text(
+                text = "00:00:00",
+                modifier = Modifier
+                    .padding(16.dp)
+                    .align(Alignment.CenterHorizontally),
+                style = MaterialTheme.typography.displayLarge)
+            Row(modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                Text(
+                    text = "800",
+                    color = MaterialTheme.colorScheme.tertiary,
+                    style = MaterialTheme.typography.bodyLarge)
+                Text(
+                    text = "1,2",
+                    color = MaterialTheme.colorScheme.onTertiary,
+                    style = MaterialTheme.typography.bodyLarge)
+                Text(
+                    text = "8,43",
+                    color = MaterialTheme.colorScheme.primary,
+                    style = MaterialTheme.typography.bodyLarge)
+            }
+            Row(modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                Text(
+                    text = "ккал",
+                    style = MaterialTheme.typography.bodyLarge)
+                Text(
+                    text = "км",
+                    style = MaterialTheme.typography.bodyLarge)
+                Text(
+                    text = "темп",
+                    style = MaterialTheme.typography.bodyLarge)
+            }
 
+            AndroidViewBinding(MapViewBinding::inflate) {
+                mapview.onStart()
+            }
         }
     }
 }
@@ -82,8 +123,7 @@ fun DashboardPreview() {
     SportsterTheme {
         DashboardScreen(
             state = DashboardViewState(),
-            navigateToPermissionScreen = {  },
-            navigateToLoginScreen = {  }
+            navigateToPermissionScreen = { }
         )
     }
 }

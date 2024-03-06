@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Sportster</string>
     <string name="web_client_id">712356485090-dfs3fnj2aprequgjd4pta91kl8km99ir.apps.googleusercontent.com</string>
+    <string name="ya.ru">ddd7a38f-011f-46c9-8a1d-3d0a02056c3c</string>
     <!-- Start Screen -->
     <string name="start_screen_title">Добро пожаловать в мир Sportster!</string>
     <string name="start_screen_greeting">Мы постоянно работаем над улучшением приложения, чтобы Вы эффективнее достигали поставленных целей. \nОднако нам нужна Ваша помощь - любую идею или предложение Вы можете направить нам прямо в приложении из меню \"Профиль\".</string>

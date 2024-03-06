@@ -93,8 +93,7 @@ fun SetupNavGraph(
                     DashboardScreen(
                         modifier = modifier,
                         state = state,
-                        navigateToPermissionScreen = { navController.navigate(Screen.PERMISSIONS.route) },
-                        navigateToLoginScreen = { navController.navigate(Screen.LOGIN.route) }
+                        navigateToPermissionScreen = { navController.navigate(Screen.PERMISSIONS.route) }
                     )
                 }
 

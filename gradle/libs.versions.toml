@@ -7,7 +7,7 @@ junitVersion = "1.1.5"
 espressoCore = "3.5.1"
 lifecycleRuntime = "2.7.0"
 activityCompose = "1.8.2"
-composeBom = "2024.02.01"
+composeBom = "2024.02.02"
 dataStore = "1.0.0"
 splashScreen = "1.0.1"
 hilt = "2.49"
@@ -19,6 +19,7 @@ firebaseBom = "32.7.3"
 playServicesAuth = "21.0.0"
 firebaseAuthKtx = "22.3.1"
 firebaseFirestoreKtx = "24.10.3"
+yandexMap = "4.5.1-lite"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -30,6 +31,7 @@ androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lif
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
 androidx-ui = { group = "androidx.compose.ui", name = "ui" }
+androidx-ui-binding = { group = "androidx.compose.ui", name = "ui-viewbinding" }
 androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
@@ -48,8 +50,7 @@ google-firebase-analytics = { group = "com.google.firebase", name = "firebase-an
 play-services-auth = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "playServicesAuth" }
 firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx", version.ref = "firebaseAuthKtx" }
 firebase-firestore-ktx = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx" }
-androidx-compose-icons = { group = "androidx.compose.material", name = "material-icons-core" }
-androidx-compose-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
+yandex-map = { group = "com.yandex.android", name = "maps.mobile", version.ref = "yandexMap" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
