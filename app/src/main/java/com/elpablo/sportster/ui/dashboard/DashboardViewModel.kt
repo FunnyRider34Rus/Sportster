@@ -1,5 +1,6 @@
 package com.elpablo.sportster.ui.dashboard
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.elpablo.sportster.core.utils.Response
@@ -19,6 +20,7 @@ class DashboardViewModel @Inject constructor(
     private val _viewState = MutableStateFlow(DashboardViewState())
     val viewState: StateFlow<DashboardViewState> = _viewState
     init {
+        Log.d("sportster", repository.isUserAuthenticatedInFirebase().toString())
         if (repository.isUserAuthenticatedInFirebase()) {
             _viewState.update {
                 it.copy(

@@ -52,6 +52,7 @@ fun SelectWeightMenu(
                 modifier = Modifier.menuAnchor(),
                 readOnly = true,
                 label = { Text(text = title) },
+                leadingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
                 suffix = suffix,
                 //leadingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
                 colors = OutlinedTextFieldDefaults.colors(

@@ -20,7 +20,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.elpablo.sportster.ui.user_data.UserDataViewState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -53,6 +52,7 @@ fun SelectHeightMenu(
                 modifier = Modifier.menuAnchor(),
                 readOnly = true,
                 label = { Text(text = title) },
+                leadingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
                 suffix = suffix,
                 //leadingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
                 colors = OutlinedTextFieldDefaults.colors(

@@ -18,6 +18,14 @@
     <string name="login_screen_button_login">Войти с</string>
     <string name="login_screen_title_error">Критическая ошибка</string>
     <string name="login_screen_button_error">Закрыть приложение</string>
+    <!-- User Data Screen -->
+    <string name="userdata_screen_title">Ваши данные</string>
+    <string name="userdata_screen_gender_field">Пол</string>
+    <string name="userdata_screen_height_field">Рост</string>
+    <string name="userdata_screen_height_value">см</string>
+    <string name="userdata_screen_weight_field">Вес</string>
+    <string name="userdata_screen_weight_value">кг</string>
+    <string name="userdata_screen_button">Далее</string>
     <!-- BottomBar -->
     <string name="bottombar_lable_dashboard">Тренировка</string>
     <string name="bottombar_label_analytics">Статистика</string>

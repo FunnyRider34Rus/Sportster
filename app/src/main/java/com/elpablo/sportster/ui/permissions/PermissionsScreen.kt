@@ -38,7 +38,7 @@ fun PermissionsScreen(
     val permissionsState = rememberMultiplePermissionsState(permissions = permissions)
 
     LaunchedEffect(key1 = permissionsState.allPermissionsGranted) {
-        if (!permissionsState.allPermissionsGranted) {
+        if (permissionsState.allPermissionsGranted) {
             navigateIfPermissionsGranted.invoke()
         }
     }
@@ -87,6 +87,21 @@ fun PermissionsScreen(
                     }
                 )
             }
+        } else {
+            Text(
+                text = stringResource(id = R.string.permissions_screen_should_show_rationale),
+                style = MaterialTheme.typography.bodyLarge
+            )
+            Spacer(modifier = Modifier.weight(1f))
+            SportsterButton(
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(bottom = 32.dp),
+                text = stringResource(id = R.string.permissions_screen_button_open_system_settings),
+                onClick = {
+                    context.openAppSettings()
+                }
+            )
         }
     }
 }

@@ -20,7 +20,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.elpablo.sportster.ui.user_data.GenderType
 import com.elpablo.sportster.ui.user_data.UserDataViewState
 
 @OptIn(ExperimentalMaterial3Api::class)

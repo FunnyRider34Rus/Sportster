@@ -36,7 +36,7 @@ fun LoginScreen(
     modifier: Modifier = Modifier,
     state: LoginViewState,
     onEvent: (LoginEvent) -> Unit,
-    navigateToMainScreen: () -> Unit
+    navigateToNexScreen: () -> Unit
 ) {
 
     val activity = LocalContext.current as Activity
@@ -55,7 +55,7 @@ fun LoginScreen(
     }
 
     if (state.isUserLogged) {
-        navigateToMainScreen.invoke()
+        navigateToNexScreen.invoke()
     }
 
     if (state.isLoading) {
@@ -120,6 +120,6 @@ fun LoginScreen(
 @Composable
 fun LoginScreenPreview() {
     SportsterTheme {
-        LoginScreen(state = LoginViewState(), onEvent = {  }, navigateToMainScreen = {  })
+        LoginScreen(state = LoginViewState(), onEvent = {  }, navigateToNexScreen = {  })
     }
 }
