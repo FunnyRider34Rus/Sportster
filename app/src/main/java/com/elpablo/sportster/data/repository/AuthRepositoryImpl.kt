@@ -18,7 +18,7 @@ class AuthRepositoryImpl @Inject constructor(
     private val auth: FirebaseAuth,
     private val firestore: FirebaseFirestore
 ) : AuthRepository {
-    override fun isUserAuthenticatedInFirebase() = auth.currentUser != null
+    override fun isUserAuthenticatedInFirebase() = auth.currentUser?.uid != null
 
     override suspend fun signIn(credential: AuthCredential): Response<Boolean> {
         return try {

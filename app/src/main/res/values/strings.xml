@@ -31,4 +31,7 @@
     <string name="bottombar_lable_dashboard">Тренировка</string>
     <string name="bottombar_label_analytics">Статистика</string>
     <string name="bottombar_label_profile">Профиль</string>
+    <!-- Dashboard screen -->
+    <string name="dashboard_screen_greeting_text">Привет,</string>
+    <string name="dashboard_screen_default_user_text">Пользователь</string>
 </resources>

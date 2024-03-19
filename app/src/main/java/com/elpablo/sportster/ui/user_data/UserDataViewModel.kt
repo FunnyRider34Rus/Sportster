@@ -1,6 +1,5 @@
 package com.elpablo.sportster.ui.user_data
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,21 +18,18 @@ class UserDataViewModel @Inject constructor() : ViewModel() {
                 _viewState.update {
                     it.copy(gender = event.value)
                 }
-                Log.d("sportster", event.value.type)
             }
 
             is UserDataEvent.OnSelectHeight -> {
                 _viewState.update {
                     it.copy(height = event.value)
                 }
-                Log.d("sportster", event.value.toString())
             }
 
             is UserDataEvent.OnSelectWeight -> {
                 _viewState.update {
                     it.copy(weight = event.value)
                 }
-                Log.d("sportster", event.value.toString())
             }
         }
     }

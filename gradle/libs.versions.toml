@@ -1,5 +1,5 @@
 [versions]
-agp = "8.4.0-alpha12"
+agp = "8.4.0-alpha13"
 kotlin = "1.9.22"
 coreKtx = "1.12.0"
 junit = "4.13.2"
@@ -10,16 +10,17 @@ activityCompose = "1.8.2"
 composeBom = "2024.02.02"
 dataStore = "1.0.0"
 splashScreen = "1.0.1"
-hilt = "2.49"
+hilt = "2.51"
 navigationCompose = "2.7.7"
 navigationHilt = "1.2.0"
 accompanistPermissions = "0.35.0-alpha"
 gmsServices = "4.4.1"
-firebaseBom = "32.7.3"
+firebaseBom = "32.7.4"
 playServicesAuth = "21.0.0"
+playServicesLocation = "21.2.0"
 firebaseAuthKtx = "22.3.1"
 firebaseFirestoreKtx = "24.10.3"
-yandexMap = "4.5.1-lite"
+yandexMap = "4.5.1-navikit"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -48,6 +49,7 @@ google-accompanist-permissions = { group = "com.google.accompanist", name = "acc
 google-firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
 google-firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 play-services-auth = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "playServicesAuth" }
+play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "playServicesLocation" }
 firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx", version.ref = "firebaseAuthKtx" }
 firebase-firestore-ktx = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx" }
 yandex-map = { group = "com.yandex.android", name = "maps.mobile", version.ref = "yandexMap" }

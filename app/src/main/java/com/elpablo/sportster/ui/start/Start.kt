@@ -32,21 +32,21 @@ fun StartScreen(modifier: Modifier = Modifier, navigateToNextScreen: () -> Unit)
         Spacer(modifier = Modifier.weight(1f))
         Text(
             text = stringResource(id = R.string.start_screen_greeting),
-            color = MaterialTheme.colorScheme.onSecondary,
+            color = MaterialTheme.colorScheme.primary,
             style = MaterialTheme.typography.bodyLarge
         )
         Spacer(modifier = Modifier.weight(1f))
         SportsterButton(
             modifier = Modifier.align(Alignment.CenterHorizontally),
             text = stringResource(id = R.string.start_screen_button),
-            onClick = navigateToNextScreen
+            onClick = { navigateToNextScreen.invoke() }
         )
     }
 }
 
 @Preview(showBackground = true, device = "id:pixel_5")
 @Composable
-fun StartPreview() {
+private fun StartPreview() {
     SportsterTheme {
         StartScreen(modifier = Modifier) {
 

@@ -30,5 +30,5 @@ class DataStoreRepositoryImpl(private val context: Context): DataStoreRepository
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = DATASTORE_REF)
 
 private object PreferencesKey {
-    val APP_ENTRY = booleanPreferencesKey(name = AppConst.APP_ENTRY)
+    val APP_ENTRY = booleanPreferencesKey(name = AppConst.APP_ENTRY_PREFERENCES_KEY)
 }

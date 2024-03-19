@@ -1,35 +1,34 @@
 package com.elpablo.sportster.ui
 
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.elpablo.sportster.core.navigation.Graph
 import com.elpablo.sportster.domain.usecases.AppEntryUseCases
-import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@HiltViewModel
-class MainActivityViewModel @Inject constructor(appEntryUseCases: AppEntryUseCases):
+class MainActivityViewModel @Inject constructor(appEntryUseCases: AppEntryUseCases) :
     ViewModel() {
 
-    var splashState by mutableStateOf(true)
-        private set
-    var startDestination by mutableStateOf(Graph.ONBOARD.route)
-        private set
+    private val _isLoading: MutableState<Boolean> = mutableStateOf(false)
+    val isLoading: State<Boolean> = _isLoading
+
+    private val _startDestination: MutableState<String> = mutableStateOf(Graph.ONBOARD.route)
+    val startDestination: State<String> = _startDestination
 
     init {
-        appEntryUseCases.readAppEntry.invoke().onEach { shouldShowStartScreen ->
-            startDestination = if (shouldShowStartScreen) {
-                Graph.MAIN.route
-            } else {
-                Graph.ONBOARD.route
-
+        viewModelScope.launch {
+            appEntryUseCases.readAppEntry.invoke().collect { isFirstStart ->
+                if (isFirstStart) {
+                    _startDestination.value = Graph.MAIN.route
+                } else {
+                    _startDestination.value = Graph.ONBOARD.route
+                }
             }
-            splashState = false
-        }.launchIn(viewModelScope)
+            _isLoading.value = true
+        }
     }
 }

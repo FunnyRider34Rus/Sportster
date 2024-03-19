@@ -1,6 +1,5 @@
 package com.elpablo.sportster.ui.login
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.elpablo.sportster.core.utils.Response
@@ -59,7 +58,6 @@ class LoginViewModel @Inject constructor(private val repository: AuthRepository)
                 }
             }
             is LoginEvent.Error -> {
-                Log.d("sportster", event.errorMessage.toString())
                 _viewState.update {
                     it.copy(
                         isError = true,

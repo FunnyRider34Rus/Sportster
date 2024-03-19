@@ -108,7 +108,7 @@ fun PermissionsScreen(
 
 @Preview(showBackground = true, device = "id:pixel_5")
 @Composable
-fun PreviewPermissionsScreen() {
+private fun PreviewPermissionsScreen() {
     SportsterTheme {
         PermissionsScreen(
             navigateIfPermissionsGranted = {  })

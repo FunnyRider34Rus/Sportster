@@ -84,7 +84,9 @@ dependencies {
     implementation(platform(libs.google.firebase.bom))
     implementation(libs.google.firebase.analytics)
     implementation(libs.firebase.auth.ktx)
+    //Google Play Services
     implementation(libs.play.services.auth)
+    implementation(libs.play.services.location)
     //Yandex Map
     implementation(libs.yandex.map)
 

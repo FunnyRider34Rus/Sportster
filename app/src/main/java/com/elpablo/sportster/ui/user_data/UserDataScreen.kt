@@ -70,7 +70,7 @@ fun UserDataScreen(
 
 @Preview(showBackground = true, device = "id:pixel_5")
 @Composable
-fun PreviewUserData() {
+private fun PreviewUserData() {
     SportsterTheme {
         UserDataScreen(modifier = Modifier, state = UserDataViewState(), onEvent = {  }, navigateToMainScreen = {  })
     }

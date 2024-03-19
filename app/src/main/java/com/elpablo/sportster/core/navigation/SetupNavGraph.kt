@@ -1,5 +1,7 @@
 package com.elpablo.sportster.core.navigation
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -22,6 +24,7 @@ import com.elpablo.sportster.ui.start.StartViewModel
 import com.elpablo.sportster.ui.user_data.UserDataScreen
 import com.elpablo.sportster.ui.user_data.UserDataViewModel
 
+@RequiresApi(Build.VERSION_CODES.P)
 @Composable
 fun SetupNavGraph(
     navController: NavHostController,
@@ -37,42 +40,6 @@ fun SetupNavGraph(
             navController = navController,
             startDestination = startDestination
         ) {
-
-            composable(route = Screen.PERMISSIONS.route) {
-                PermissionsScreen(
-                    modifier = modifier,
-                    navigateIfPermissionsGranted = {
-                        navController.navigate(Graph.MAIN.route)
-                    }
-                )
-            }
-
-            composable(route = Screen.LOGIN.route) {
-                val viewModel: LoginViewModel = hiltViewModel()
-                val state by viewModel.viewState.collectAsStateWithLifecycle()
-                LoginScreen(
-                    modifier = modifier,
-                    state = state,
-                    onEvent = viewModel::onEvent,
-                    navigateToNexScreen = {
-                        navController.navigate(Screen.USERDATA.route)
-                    }
-                )
-            }
-
-            composable(route = Screen.USERDATA.route) {
-                val viewModel: UserDataViewModel = hiltViewModel()
-                val state by viewModel.viewState.collectAsStateWithLifecycle()
-                UserDataScreen(
-                    modifier = modifier,
-                    state = state,
-                    onEvent = viewModel::onEvent,
-                    navigateToMainScreen = {
-                        navController.navigate(Graph.MAIN.route)
-                    }
-                )
-            }
-
             navigation(startDestination = Screen.START.route, route = Graph.ONBOARD.route) {
                 composable(route = Screen.START.route) {
                     val viewModel: StartViewModel = hiltViewModel()
@@ -84,6 +51,45 @@ fun SetupNavGraph(
                         }
                     )
                 }
+
+                composable(route = Screen.LOGIN.route) {
+                    val viewModel: LoginViewModel = hiltViewModel()
+                    val state by viewModel.viewState.collectAsStateWithLifecycle()
+                    LoginScreen(
+                        modifier = modifier,
+                        state = state,
+                        onEvent = viewModel::onEvent,
+                        navigateToNexScreen = {
+                            navController.navigate(Screen.USERDATA.route)
+                        }
+                    )
+                }
+
+                composable(route = Screen.USERDATA.route) {
+                    val viewModel: UserDataViewModel = hiltViewModel()
+                    val state by viewModel.viewState.collectAsStateWithLifecycle()
+                    UserDataScreen(
+                        modifier = modifier,
+                        state = state,
+                        onEvent = viewModel::onEvent,
+                        navigateToMainScreen = {
+                            navController.navigate(route = Graph.MAIN.route) {
+                                popUpTo(Graph.ONBOARD.route) {
+                                    inclusive = true
+                                }
+                            }
+                        }
+                    )
+                }
+            }
+
+            composable(route = Screen.PERMISSIONS.route) {
+                PermissionsScreen(
+                    modifier = modifier,
+                    navigateIfPermissionsGranted = {
+                        navController.navigate(Graph.MAIN.route)
+                    }
+                )
             }
 
             navigation(startDestination = Screen.DASHBOARD.route, route = Graph.MAIN.route) {
@@ -93,6 +99,7 @@ fun SetupNavGraph(
                     DashboardScreen(
                         modifier = modifier,
                         state = state,
+                        onEvent = viewModel::onEvent,
                         navigateToPermissionScreen = { navController.navigate(Screen.PERMISSIONS.route) }
                     )
                 }
@@ -108,9 +115,3 @@ fun SetupNavGraph(
         }
     }
 }
-
-//navController.navigate(route = Graph.MAIN.route) {
-//    popUpTo(Graph.ONBOARD.route) {
-//        inclusive = true
-//    }
-//}

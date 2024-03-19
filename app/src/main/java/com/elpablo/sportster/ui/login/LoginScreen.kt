@@ -118,7 +118,7 @@ fun LoginScreen(
 
 @Preview(showBackground = true, device = "id:pixel_5")
 @Composable
-fun LoginScreenPreview() {
+private fun LoginScreenPreview() {
     SportsterTheme {
         LoginScreen(state = LoginViewState(), onEvent = {  }, navigateToNexScreen = {  })
     }
